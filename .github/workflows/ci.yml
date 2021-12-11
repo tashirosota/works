@@ -1,0 +1,74 @@
+name: CI
+on: [push, pull_request]
+# TODO:
+jobs:
+  test:
+    name: unittest
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        elixirbase:
+          - "1.11.0-erlang-23.1.1-alpine-3.13.1"
+          - "1.11.0-erlang-21.3.8.21-alpine-3.13.1"
+    steps:
+      - uses: earthly/actions/setup-earthly@v1
+        with:
+          version: v0.5.10
+      - uses: actions/checkout@v2
+      - name: test ectl_sql
+        run: earthly -P --ci --build-arg ELIXIR_BASE=${{matrix.elixirbase}} +test
+  test-postgres:
+    name: postgres integration test
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        elixirbase:
+          - "1.9.4-erlang-22.3.4.16-alpine-3.13.1"
+        postgres:
+          - "11.11"
+          - "9.6"
+          - "9.5"
+    steps:
+      - uses: earthly/actions/setup-earthly@v1
+        with:
+          version: v0.5.10
+      - uses: actions/checkout@v2
+      - name: test ecto_sql
+        run: earthly -P --ci --build-arg ELIXIR_BASE=${{matrix.elixirbase}} --build-arg POSTGRES=${{matrix.postgres}} +integration-test-postgres
+  test-mysql:
+    name: mysql integration test
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        elixirbase:
+          - "1.9.4-erlang-22.3.4.16-alpine-3.13.1"
+        mysql:
+          - "5.7"
+    steps:
+      - uses: earthly/actions/setup-earthly@v1
+        with:
+          version: v0.5.10
+      - uses: actions/checkout@v2
+      - name: test ecto_sql
+        run: earthly -P --ci --build-arg ELIXIR_BASE=${{matrix.elixirbase}} --build-arg POSTGRES=${{matrix.postgres}} +integration-test-mysql
+  test-mssql:
+    name: mssql integration test
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        elixirbase:
+          - "1.9.4-erlang-22.1.7-alpine-3.11.3"
+        mssql:
+          - "2017"
+          - "2019"
+    steps:
+      - uses: earthly/actions/setup-earthly@v1
+        with:
+          version: v0.5.10
+      - uses: actions/checkout@v2
+      - name: test ecto_sql
+        run: earthly -P --ci --build-arg ELIXIR_BASE=${{matrix.elixirbase}} --build-arg MSSQL=${{matrix.mssql}} +integration-test-mssql
