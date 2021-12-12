@@ -1,10 +1,8 @@
 rdb:
 	earthly -P +rdb
-rdb-logs:
-	docker logs -f postgresdb
 ddb:
 	earthly -P +ddb
-db: rdb ddb rdb-logs
+db: rdb ddb
 rdb-down:
 	docker stop postgresdb
 ddb-down:
