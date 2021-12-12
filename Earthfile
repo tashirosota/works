@@ -1,11 +1,22 @@
 db:
+    BUILD +ddb
+    BUILD +rdb
+ddb:
     ARG DYNAMODB_VER="1.17.1"
     LOCALLY
     WITH DOCKER \
         --pull "amazon/dynamodb-local:$DYNAMODB_VER"
         RUN set -e; \
+            docker run -d --rm -v $(pwd)/data/dynamo:/data --name dynamodb -p 8000:8000 amazon/dynamodb-local -jar DynamoDBLocal.jar -dbPath /data -sharedDb;
+    END
+rdb:
+    ARG POSTGRES_VER="13.4"
+    LOCALLY
+    WITH DOCKER \
+        --pull "posgres:$POSTGRES_VER"
+        RUN set -e; \
             timeout=$(expr $(date +%s) + 30); \
-            docker run -v $(pwd)/data:/data --name dynamodb -p 8000:8000 amazon/dynamodb-local -jar DynamoDBLocal.jar -dbPath /data -sharedDb;
+            docker run -d --rm -v $(pwd)/data/pg:/var/lib/postgresql/data --name postgresdb -p 5432:5432 -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=postgres -e POSTGRES_DB=postgres "postgres:$POSTGRES_VER";
     END
 # all:
 #     BUILD +test-all

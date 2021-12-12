@@ -32,4 +32,5 @@ works-*.tar
 npm-debug.log
 /assets/node_modules/
 
-/data/
+/*data/
+.env
