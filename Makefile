@@ -1,8 +1,3 @@
-rdb:
-	earthly -P +rdb
-ddb:
-	earthly -P +ddb
-db: rdb ddb
 rdb-down:
 	docker stop postgresdb
 ddb-down:

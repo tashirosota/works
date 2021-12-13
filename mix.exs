@@ -20,7 +20,7 @@ defmodule Works.MixProject do
   def application do
     [
       mod: {Works.Application, []},
-      extra_applications: [:logger, :runtime_tools]
+      extra_applications: [:logger, :runtime_tools, :os_mon]
     ]
   end
 
@@ -33,6 +33,7 @@ defmodule Works.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
+      {:bcrypt_elixir, "~> 2.0"},
       {:phoenix, "~> 1.6.4"},
       {:phoenix_ecto, "~> 4.4"},
       {:ecto_sql, "~> 3.6"},
@@ -49,8 +50,7 @@ defmodule Works.MixProject do
       {:jason, "~> 1.2"},
       {:plug_cowboy, "~> 2.5"},
       {:ex_aws_dynamo, ">= 4.0.0"},
-      {:dotenv, ">= 2.1.0"},
-      {:comeonin, ">= 0.0.0"}
+      {:dotenv, ">= 2.1.0"}
     ]
   end
 
