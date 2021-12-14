@@ -18,6 +18,22 @@ rdb:
             timeout=$(expr $(date +%s) + 30); \
             docker run -d --rm -v $(pwd)/data/pg:/var/lib/postgresql/data --name postgresdb -p 5432:5432 -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=postgres -e POSTGRES_DB=postgres "postgres:$POSTGRES_VER";
     END
+test:
+    ARG ELIXIR_BASE=1.13.0-erlang-24.0.5-alpine-3.14.0
+    FROM hexpm/elixir:$ELIXIR_BASE
+    RUN apk add --no-progress --update git postgresql-client build-base
+    WORKDIR /src/
+    COPY . .
+    ENV ELIXIR_ASSERT_TIMEOUT=10000
+    ENV MIX_TEST_PARTITION=5
+    ENV MIX_ENV=test
+    RUN mix local.rebar --force
+    RUN mix local.hex --force
+    RUN mix deps.get
+    RUN mix ecto.create
+    RUN mix ecto.migrate
+    RUN mix test
+
 # all:
 #     BUILD +test-all
 #     BUILD +integration-test-all
@@ -28,8 +44,6 @@ rdb:
 #         --build-arg ELIXIR_BASE=1.11.0-erlang-23.1.1-alpine-3.13.1 \
 #         --build-arg ELIXIR_BASE=1.11.0-erlang-21.3.8.21-alpine-3.13.1 \
 #         +test
-
-
 # test:
 #     FROM +test-setup
 #     RUN MIX_ENV=test mix deps.compile
