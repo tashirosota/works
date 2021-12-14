@@ -9,7 +9,8 @@ jobs:
         with:
           version: v0.5.10
       - uses: actions/checkout@v2
-      - run: earthly -P --ci +rdb
+      - run: earthly -P +rdb
+      - run: sudo chmod a+r data/pg # data/pgは+rdb時に自動生成されるファイルで権限が違うため、ここで付与しておく
       - run: earthly -P --ci +test
   # test-postgres:
   #   name: postgres integration test

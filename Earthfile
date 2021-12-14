@@ -21,9 +21,9 @@ rdb:
 test:
     ARG ELIXIR_BASE=1.13.0-erlang-24.0.5-alpine-3.14.0
     FROM hexpm/elixir:$ELIXIR_BASE
-    RUN apk add --no-progress --update git postgresql-client build-base
     WORKDIR /src/
     COPY . .
+    RUN apk add --no-progress --update git postgresql-client build-base
     ENV ELIXIR_ASSERT_TIMEOUT=10000
     ENV MIX_TEST_PARTITION=5
     ENV MIX_ENV=test
