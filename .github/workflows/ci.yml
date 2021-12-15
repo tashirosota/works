@@ -10,7 +10,10 @@ jobs:
           version: v0.5.10
       - uses: actions/checkout@v2
       - run: earthly -P +rdb
-      - run: sudo chmod a+r data/pg # data/pgは+rdb時に自動生成されるファイルで権限が違うため、ここで付与しておく
+      - run: sudo chown -R runner:docker data # data/pgは+rdb時に自動生成されるファイルで権限が違うため、ここで付与しておく
+      - run: cat /etc/hosts
+      - run: docker ps
+      - run: export BUILDKIT_HOST=docker-container://earthly-buildkitd 
       - run: earthly -P --ci +test
   # test-postgres:
   #   name: postgres integration test
