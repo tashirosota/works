@@ -20,12 +20,12 @@ rdb:
     END
 test:
     ARG ELIXIR_BASE=1.13.0-erlang-24.0.5-alpine-3.14.0
-    LOCALLY
     FROM hexpm/elixir:$ELIXIR_BASE
     WORKDIR /src/
     COPY . .
-    RUN cat /etc/hosts
     RUN apk add --no-progress --update git curl postgresql-client build-base
+    RUN pg_isready --version
+    RUN pg_isready --host=localhost --port=5432
     ENV ELIXIR_ASSERT_TIMEOUT=10000
     ENV MIX_TEST_PARTITION=5
     ENV MIX_ENV=test
