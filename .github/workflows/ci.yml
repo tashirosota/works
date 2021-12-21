@@ -11,8 +11,7 @@ jobs:
       - uses: actions/checkout@v2
       - run: earthly -P +rdb
       - run: sudo chown -R runner:docker data # data/pgは+rdb時に自動生成されるファイルで権限が違うため、ここで付与しておく
-      - run: cat /etc/hosts
-      - run: docker ps
+      - uses: mxschmitt/action-tmate@v3
       - run: earthly -P +test
   # test-postgres:
   #   name: postgres integration test

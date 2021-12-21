@@ -23,7 +23,7 @@ test:
     FROM hexpm/elixir:$ELIXIR_BASE
     WORKDIR /src/
     COPY . .
-    RUN apk add --no-progress --update git curl postgresql-client build-base
+    RUN apk add --no-progress --update git postgresql-client build-base
     RUN pg_isready --version
     RUN pg_isready --host=localhost --port=5432
     ENV ELIXIR_ASSERT_TIMEOUT=10000
