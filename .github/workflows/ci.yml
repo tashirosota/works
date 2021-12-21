@@ -1,6 +1,33 @@
 name: CI
 on: [push, pull_request]
 jobs:
+  test_zero:
+    name: unittest0
+    runs-on: ubuntu-latest
+    container: hexpm/elixir:1.13.0-erlang-24.0.5-alpine-3.14.0
+    env:
+      MIX_ENV: test
+      MIX_TEST_PARTITION: 5
+    services:
+      postgres:
+        image: postgres:13.4
+        env:
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_USER: postgres
+          POSTGRES_DB: postgres
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    steps:
+      - uses: actions/checkout@v2
+      - run: mix local.rebar --force
+      - run: mix local.hex --force
+      - run: mix deps.get
+      - run: mix ecto.create
+      - run: mix ecto.migrate
+      - run: mix test
   test:
     name: unittest
     runs-on: ubuntu-latest
