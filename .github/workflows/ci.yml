@@ -4,7 +4,6 @@ jobs:
   test_zero:
     name: unittest0
     runs-on: ubuntu-latest
-    container: hexpm/elixir:1.13.0-erlang-24.0.5-alpine-3.14.0
     env:
       MIX_ENV: test
       MIX_TEST_PARTITION: 5
@@ -20,29 +19,40 @@ jobs:
           --health-interval 10s
           --health-timeout 5s
           --health-retries 5
+        ports:
+          - 5432:5432
+      dynamo_db:
+        image: amazon/dynamodb-local:1.17.1
+        ports:
+          - 8000:8000
     steps:
       - uses: actions/checkout@v2
+      - uses: erlef/setup-elixir@v1
+        with:
+          otp-version: '24.0.5'
+          elixir-version: '1.13.0'
       - run: mix local.rebar --force
       - run: mix local.hex --force
       - run: mix deps.get
       - run: mix ecto.create
       - run: mix ecto.migrate
+      - run: mix format --check-formatted
       - run: mix test
-  test:
-    name: unittest
-    runs-on: ubuntu-latest
-    steps:
-      - uses: earthly/actions/setup-earthly@v1
-        with:
-          version: v0.5.10
-      - uses: actions/checkout@v2
-      - run: earthly -P +rdb
-      - run: docker ps
-      - run: sudo docker network ls 
-      - run: sudo chown -R runner:docker data # data/pgは+rdb時に自動生成されるファイルで権限が違うため、ここで付与しておく
-      - run: sudo apt-get install postgresql-client
-      - run: sudo pg_isready --host=postgresdb --port=5432
-      - run: earthly -P +test
+  # test:
+  #   name: unittest
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: earthly/actions/setup-earthly@v1
+  #       with:
+  #         version: v0.5.10
+  #     - uses: actions/checkout@v2
+  #     - run: earthly -P +rdb
+  #     - run: docker ps
+  #     - run: sudo docker network ls 
+  #     - run: sudo chown -R runner:docker data # data/pgは+rdb時に自動生成されるファイルで権限が違うため、ここで付与しておく
+  #     - run: sudo apt-get install postgresql-client
+  #     - run: sudo pg_isready --host=localhost --port=5432 # こいつが通らないのわけわからないわけわからないので一旦pending
+  #     - run: earthly -P +test
   # test-postgres:
   #   name: postgres integration test
   #   runs-on: ubuntu-latest
