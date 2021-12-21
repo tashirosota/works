@@ -29,7 +29,7 @@ test:
     ENV ELIXIR_ASSERT_TIMEOUT=10000
     ENV MIX_TEST_PARTITION=5
     ENV MIX_ENV=test
-    # ENV DB_HOST=127.0.0.1 # cat /etc/hostsで見つけたhostなので若干怪しい
+    ENV DB_HOST=0.0.0.0 # cat /etc/hostsで見つけたhostなので若干怪しい
     RUN mix local.rebar --force
     RUN mix local.hex --force
     RUN mix deps.get

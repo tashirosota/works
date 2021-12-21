@@ -10,8 +10,11 @@ jobs:
           version: v0.5.10
       - uses: actions/checkout@v2
       - run: earthly -P +rdb
+      - run: docker ps
+      - run: sudo docker network ls 
       - run: sudo chown -R runner:docker data # data/pgは+rdb時に自動生成されるファイルで権限が違うため、ここで付与しておく
-      - uses: mxschmitt/action-tmate@v3
+      - run: sudo apt-get install postgresql-client
+      - run: sudo pg_isready --host=postgresdb --port=5432
       - run: earthly -P +test
   # test-postgres:
   #   name: postgres integration test
