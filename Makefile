@@ -5,9 +5,9 @@ ddb-down:
 earthly-down:
 	docker stop earthly-buildkitd
 down: rdb-down ddb-down earthly-down
-db:
+compose:
 	docker-compose up
-db-down:
+compose-down:
 	docker-compose down
 c:
 	iex -S mix phx.server
