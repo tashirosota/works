@@ -18,8 +18,7 @@ defmodule WorksWeb.UserSettingsController do
       {:ok, applied_user} ->
         Accounts.deliver_update_email_instructions(
           applied_user,
-          user.email,
-          &Routes.user_settings_url(conn, :confirm_email, &1)
+          user.email
         )
 
         conn
@@ -47,20 +46,6 @@ defmodule WorksWeb.UserSettingsController do
 
       {:error, changeset} ->
         render(conn, "edit.html", password_changeset: changeset)
-    end
-  end
-
-  def confirm_email(conn, %{"token" => token}) do
-    case Accounts.update_user_email(conn.assigns.current_user, token) do
-      :ok ->
-        conn
-        |> put_flash(:info, "Email changed successfully.")
-        |> redirect(to: Routes.user_settings_path(conn, :edit))
-
-      :error ->
-        conn
-        |> put_flash(:error, "Email change link is invalid or it has expired.")
-        |> redirect(to: Routes.user_settings_path(conn, :edit))
     end
   end
 

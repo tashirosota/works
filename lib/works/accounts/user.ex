@@ -15,7 +15,8 @@ defmodule Works.Accounts.User do
   A user changeset for registration.
 
   It is important to validate the length of both email and password.
-  Otherwise databases may truncate the email without warnings, which
+  Otherwise databases may truncate the emaideliver_user_reset_password_instructions
+  l without warnings, which
   could lead to unpredictable or insecure behaviour. Long passwords may
   also be very expensive to hash for certain algorithms.
 
