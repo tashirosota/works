@@ -14,6 +14,7 @@ defmodule WorksWeb.UserRegistrationController do
   @spec create(Plug.Conn.t(), map) :: Plug.Conn.t()
   def create(conn, %{"user" => user_params}) do
     {:ok, user} = Accounts.register_user(user_params)
+
     conn
     |> put_flash(:info, "User created successfully.")
     |> UserAuth.log_in_user(user)

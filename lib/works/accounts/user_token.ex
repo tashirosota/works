@@ -126,6 +126,7 @@ defmodule Works.Accounts.UserToken do
 
   defp days_for_context("confirm"), do: @confirm_validity_in_days
   defp days_for_context("reset_password"), do: @reset_password_validity_in_days
+
   @doc """
   Returns the token struct for the given token value and context.
   """
