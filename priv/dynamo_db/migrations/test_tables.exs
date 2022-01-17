@@ -1,12 +1,12 @@
 
 defmodule Works.DynamoDb.Migrations.TestTables do
-  import Works.DynamoDb.Repo
+  alias Works.DynamoDb.Repo
   @schema %Works.DynamoDb.Schema{
     table_name: "Tests",
     key_schema: [id: :hash],
-    key_definitions: %{id: :string, email: :string}
+    key_definitions: %{id: :string}
   }
-  def execute! do
-    migration_required?(@schema) && migrate!(@schema)
+  def migrate! do
+    Repo.migrate!(@schema)
   end
 end

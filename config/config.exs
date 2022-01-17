@@ -17,6 +17,18 @@ config :works, WorksWeb.Endpoint,
   pubsub_server: Works.PubSub,
   live_view: [signing_salt: "VKu0FTTw"]
 
+# use DynamoDB
+config :ex_aws,
+  access_key_id: [{:system, "AWS_ACCESS_KEY_ID"}, :instance_role],
+  secret_access_key: [{:system, "AWS_SECRET_ACCESS_KEY"}, :instance_role],
+  region: {:system, "AWS_REGION"}
+
+config :ex_aws, :dynamodb,
+  scheme: {:system, "DYNAMO_SCHEMA"},
+  host: {:system, "DYNAMO_HOST"},
+  port: {:system, "DYNAMO_PORT"},
+  region: {:system, "AWS_REGION"}
+
 # Configure esbuild (the version is required)
 config :esbuild,
   version: "0.13.5",
@@ -34,12 +46,6 @@ config :logger, :console,
 
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason
-
-# use DynamoDB
-config :ex_aws,
-  access_key_id: [{:system, "AWS_ACCESS_KEY_ID"}, :instance_role],
-  secret_access_key: [{:system, "AWS_SECRET_ACCESS_KEY"}, :instance_role],
-  region: {:system, "AWS_REGION"}
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.

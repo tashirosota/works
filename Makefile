@@ -13,3 +13,5 @@ c:
 	iex -S mix phx.server
 s:
 	mix phx.server
+migrate:
+	mix ecto.migrate && mix dynamo
