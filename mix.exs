@@ -5,7 +5,7 @@ defmodule Works.MixProject do
     [
       app: :works,
       version: "0.1.0",
-      elixir: "~> 1.13",
+      elixir: "~> 1.13.2",
       elixirc_paths: elixirc_paths(Mix.env()),
       compilers: [:gettext] ++ Mix.compilers(),
       start_permanent: Mix.env() == :prod,
@@ -50,7 +50,8 @@ defmodule Works.MixProject do
       {:jason, "~> 1.2"},
       {:plug_cowboy, "~> 2.5"},
       {:ex_aws_dynamo, ">= 4.0.0"},
-      {:dotenv, ">= 2.1.0"}
+      {:dotenv, ">= 2.1.0"},
+      {:r_enum, "~> 0.1"}
     ]
   end
 
