@@ -1,6 +1,5 @@
 defmodule Works.DynamoDb.OpenSourceSoftweres do
-  require Logger
-  alias ExAws.Dynamo
+  alias Works.DynamoDb.Repo
   use MakeEnumerable
   defstruct [:id, :created_at, :body]
 
@@ -11,10 +10,7 @@ defmodule Works.DynamoDb.OpenSourceSoftweres do
   }
 
   def all do
-    Dynamo.scan(@schema.table_name)
-    |> ExAws.request!()
-    |> Dynamo.decode_item(as: __MODULE__)
-    |> REnum.sort_by(& &1.id)
+    Repo.all(@schema.table_name, __MODULE__)
   end
 
   def create!(open_source_softwere_params) do
@@ -27,22 +23,13 @@ defmodule Works.DynamoDb.OpenSourceSoftweres do
       |> Map.put(:id, id_str)
       |> Map.put(:created_at, now_str)
 
-    Dynamo.put_item(
-      @schema.table_name,
-      params
-    )
-    |> ExAws.request!()
+    Repo.create(@schema.table_name, params)
 
     find(id_str, now_str)
   end
 
   def find(id_str, now_str) do
-    Dynamo.get_item(
-      @schema.table_name,
-      %{id: id_str, created_at: now_str}
-    )
-    |> ExAws.request!()
-    |> Dynamo.decode_item(as: __MODULE__)
+    Repo.find(@schema.table_name, __MODULE__, %{id: id_str, created_at: now_str})
   end
 
   def schema do

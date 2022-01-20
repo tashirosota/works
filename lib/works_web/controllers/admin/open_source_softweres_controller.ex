@@ -3,11 +3,7 @@ defmodule WorksWeb.Admin.OpenSourceSoftweresController do
   alias Works.DynamoDb.OpenSourceSoftweres
 
   def index(conn, _params) do
-    open_source_softweres =
-      OpenSourceSoftweres.all()
-      |> IO.inspect()
-
-    render(conn, "index.html", open_source_softweres: open_source_softweres)
+    render(conn, "index.html", open_source_softweres: OpenSourceSoftweres.all())
   end
 
   @spec create(Plug.Conn.t(), map) :: Plug.Conn.t()
