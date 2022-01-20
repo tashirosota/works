@@ -52,7 +52,9 @@ defmodule Works.MixProject do
       {:ex_aws_dynamo, ">= 4.0.0"},
       {:dotenv, ">= 2.1.0"},
       {:r_enum, "~> 0.1"},
-      {:hackney, "~>  1.16"}
+      {:hackney, "~>  1.16"},
+      {:make_enumerable, "~> 0.0.1"},
+      {:timex, "~> 3.0"}
     ]
   end
 

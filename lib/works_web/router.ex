@@ -68,4 +68,9 @@ defmodule WorksWeb.Router do
 
     delete "/users/log_out", UserSessionController, :delete
   end
+
+  scope "/admin", WorksWeb do
+    pipe_through [:browser, :require_authenticated_user]
+    resources "/open_source_softwares", Admin.OpenSourceSoftweresController
+  end
 end

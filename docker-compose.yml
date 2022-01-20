@@ -16,7 +16,7 @@ services:
       - ./data/pg:/var/lib/postgresql/data
 
   dynamodb:
-    container_name: test_dynamodb-local
+    container_name: dynamodb-local
     image: amazon/dynamodb-local:latest
     user: root
     command: -jar DynamoDBLocal.jar -sharedDb -dbPath /data
@@ -24,6 +24,15 @@ services:
       - ./data/dynamo:/data
     ports:
       - 8000:8000
+  dynamodb-admin:
+    container_name: dynamodb-admin
+    image: aaronshaf/dynamodb-admin:latest
+    environment:
+      - DYNAMO_ENDPOINT=host.docker.internal:8000
+    ports:
+      - 8001:8001
+    depends_on:
+      - dynamodb
   pgadmin4:
     image: dpage/pgadmin4:5.6
     container_name: pgadmin4
@@ -36,12 +45,3 @@ services:
       PGADMIN_DEFAULT_PASSWORD: root
     hostname: pgadmin4
     restart: always
-  dynamodb-admin:
-    container_name: test_dynamodb-admin
-    image: aaronshaf/dynamodb-admin:latest
-    environment:
-      - DYNAMO_ENDPOINT=localhost:8000
-    ports:
-      - 8001:8001
-    depends_on:
-      - dynamodb
