@@ -9,6 +9,18 @@ config :works, Works.Repo,
   show_sensitive_data_on_connection_error: true,
   pool_size: 10
 
+# use DynamoDB
+config :ex_aws,
+  access_key_id: "dummy_access_key",
+  secret_access_key: "dummy_secret_key",
+  region: "us-east-1"
+
+config :ex_aws, :dynamodb,
+  scheme: "http://",
+  host: "localhost",
+  port: "8000",
+  region: "us-east-1"
+
 # For development, we disable any cache and enable
 # debugging and code reloading.
 #

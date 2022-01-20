@@ -19,7 +19,7 @@ rdb:
             docker run --rm -d -v $(pwd)/data/pg:/var/lib/postgresql/data --name postgresdb -p 5432:5432 -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=postgres -e POSTGRES_DB=postgres "postgres:$POSTGRES_VER";
     END
 test:
-    ARG ELIXIR_BASE=1.13.0-erlang-24.0.5-alpine-3.14.0
+    ARG ELIXIR_BASE=1.13.2-erlang-24.0.5-alpine-3.14.0
     FROM hexpm/elixir:$ELIXIR_BASE
     WORKDIR /src/
     COPY . .
