@@ -1,11 +1,10 @@
-<h1>Settings</h1>
 <h2>OSS List</h2>
 <table>
   <thead> 
-    <th>body</th>
-    <th>created_at</th>
-    <th>id</th>
-
+    <th>作成日時</th>
+    <th>概要</th>
+    <th>ID</th>
+    <th>URL</th>
   </thead>
   <tbody> 
     <%= @open_source_softweres |> REnum.map(fn el ->%>
@@ -17,9 +16,11 @@
     <% end) %>
   </tbody>
 </table>
-<h2>New</h2>
+<h2>新規作成</h2>
 <.form let={form} for={@conn} action={Routes.open_source_softweres_path(@conn, :create)} as={:open_source_softwere}>
-  <%= label form, :body %>
-  <%= text_input form, :body, required: true %>
+  <%= label form, :概要 %>
+  <%= text_input form, :description, required: true %>
+  <%= label form, :URL %>
+  <%= text_input form, :url, required: true %>
   <%= submit "Create" %>
 </.form>

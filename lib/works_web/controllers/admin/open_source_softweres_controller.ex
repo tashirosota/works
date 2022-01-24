@@ -11,14 +11,4 @@ defmodule WorksWeb.Admin.OpenSourceSoftweresController do
     OpenSourceSoftweres.create!(open_source_softwere_params)
     redirect(conn, to: "/admin/open_source_softwares")
   end
-
-  def update(conn, _params) do
-    :come_here
-    |> IO.inspect()
-  end
-
-  def delete(conn, _params) do
-    :come_here
-    |> IO.inspect()
-  end
 end
