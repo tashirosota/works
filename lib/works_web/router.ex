@@ -20,7 +20,7 @@ defmodule WorksWeb.Router do
   scope "/", WorksWeb do
     pipe_through :browser
 
-    get "/", PageController, :index
+    live("/", LiveView.HomeLive)
   end
 
   # Other scopes may use custom stacks.
