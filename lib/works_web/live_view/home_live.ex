@@ -28,9 +28,9 @@ defmodule WorksWeb.LiveView.HomeLive do
       <br/>
       <button phx-click="oss" style="display: block; margin: 10px auto; width: 200px; color: #073642; font-size: 25px" class="bg-green-500 hover:bg-green-400 font-bold border-b-4 border-green-700 hover:border-green-500 rounded">OSS</button>
       <%=if(@open_source_softweres |> RUtils.present?) do%>
-        <div style="max-height: 300px; overflow-y: auto;">
+        <div style="max-height: 300px; overflow-y: auto; max-width: 600px; margin: auto; padding: 0px 20px;">
           <%=@open_source_softweres |> REnum.map(fn el ->%>
-            <a href="<%=el.url%>" target="_blank" style="display: block; margin: auto; width: 300px; border: #657b83 solid 1px; margin-top: 5px; padding: 3px; position: relative;">
+            <a href="<%=el.url%>" target="_blank" style="display: block; margin: auto; border: #657b83 solid 1px; margin-top: 5px; padding: 3px; position: relative;">
               <div style="font-weight: bold; border-bottom: #2aa198 solid 1px"><%= el.title %></div>
               <p style="color: #657b83; font-size: 15px;"><%= el.description %></p>
               <img src="images/url.png" style="width: 15px; position: absolute; right: 5px; bottom: 5px;"/>
@@ -40,9 +40,9 @@ defmodule WorksWeb.LiveView.HomeLive do
       <%end%>
       <button phx-click="article" style="display: block; margin: 10px auto; width: 200px; color: #073642; font-size: 25px" class="bg-green-500 hover:bg-green-400 font-bold border-b-4 border-green-700 hover:border-green-500 rounded">Article</button>
       <%=if(@articles |> RUtils.present?) do%>
-        <div style="max-height: 300px; overflow-y: auto;">
+        <div style="max-height: 300px; overflow-y: auto; max-width: 600px; margin: auto; padding: 0px 20px;">
           <%=@articles |> REnum.map(fn el ->%>
-            <a href="<%=el.url%>" target="_blank" style="display: block; margin: auto; width: 300px; border: #657b83 solid 1px; margin-top: 5px; padding: 3px; position: relative;">
+            <a href="<%=el.url%>" target="_blank" style="display: block; margin: auto; border: #657b83 solid 1px; margin-top: 5px; padding: 3px; position: relative;">
               <div style="font-weight: bold; border-bottom: #2aa198 solid 1px"><%= el.title %></div>
               <p style="color: #657b83; font-size: 15px;"><%= el.description %></p>
               <img src="images/url.png" style="width: 15px; position: absolute; right: 5px; bottom: 5px;"/>
@@ -52,16 +52,16 @@ defmodule WorksWeb.LiveView.HomeLive do
       <%end%>
       <button phx-click="music" style="display: block; margin: 10px auto; width: 200px; color: #073642; font-size: 25px" class="bg-green-500 hover:bg-green-400 font-bold border-b-4 border-green-700 hover:border-green-500 rounded">Music</button>
       <%=if(@musics |> RUtils.present?) do%>
-      <div style="max-height: 300px; overflow-y: auto;">
-        <%=@musics |> REnum.map(fn el ->%>
-          <a href="<%=el.url%>" target="_blank" style="display: block; margin: auto; width: 300px; border: #657b83 solid 1px; margin-top: 5px; padding: 3px; position: relative;">
-            <div style="font-weight: bold; border-bottom: #2aa198 solid 1px"><%= el.title %></div>
-            <p style="color: #657b83; font-size: 15px;"><%= el.description %></p>
-            <img src="images/url.png" style="width: 15px; position: absolute; right: 5px; bottom: 5px;"/>
-          </a>
-        <%end)%>
-      </div>
-    <%end%>
+        <div style="max-height: 300px; overflow-y: auto; max-width: 600px; margin: auto; padding: 0px 20px;">
+          <%=@musics |> REnum.map(fn el ->%>
+            <a href="<%=el.url%>" target="_blank" style="display: block; margin: auto; border: #657b83 solid 1px; margin-top: 5px; padding: 3px; position: relative;">
+              <div style="font-weight: bold; border-bottom: #2aa198 solid 1px"><%= el.title %></div>
+              <p style="color: #657b83; font-size: 15px;"><%= el.description %></p>
+              <img src="images/url.png" style="width: 15px; position: absolute; right: 5px; bottom: 5px;"/>
+            </a>
+          <%end)%>
+        </div>
+      <%end%>
 
       <ul style="font-size: 15px; margin-top: 30px" class="font-bold">
         <li style="display: block; margin: 10px auto; width: fit-content; display: flex;">

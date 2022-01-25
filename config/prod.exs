@@ -10,9 +10,9 @@ import Config
 # which you should run after static files are built and
 # before starting your production server.
 config :works, WorksWeb.Endpoint,
-       url: [host: "sotashiro.gigalixirapp.com", port: 443],
-       check_origin: ["https://sotashiro.gigalixirapp.com"],
-       cache_static_manifest: "priv/static/cache_manifest.json"
+  url: [host: "sotashiro.gigalixirapp.com", port: 443],
+  check_origin: ["https://sotashiro.gigalixirapp.com"],
+  cache_static_manifest: "priv/static/cache_manifest.json"
 
 # Do not print debug messages in production
 config :logger, level: :info

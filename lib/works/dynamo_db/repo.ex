@@ -51,6 +51,7 @@ defmodule Works.DynamoDb.Repo do
       schema.billing_mode
     )
     |> ExAws.request!()
+
     insert_dynamy_table(schema)
   end
 
