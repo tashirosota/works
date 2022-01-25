@@ -42,8 +42,6 @@ defmodule Works.DynamoDb.Repo do
   end
 
   defp create_table(schema) do
-    insert_dynamy_table(schema)
-
     Dynamo.create_table(
       schema.table_name,
       schema.key_schema,
@@ -53,6 +51,7 @@ defmodule Works.DynamoDb.Repo do
       schema.billing_mode
     )
     |> ExAws.request!()
+    insert_dynamy_table(schema)
   end
 
   defp insert_dynamy_table(schema) do
