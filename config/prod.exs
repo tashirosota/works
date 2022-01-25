@@ -49,7 +49,7 @@ config :logger, level: :info
 # Check `Plug.SSL` for all available options in `force_ssl`.
 
 config :works, Works.Repo,
-  url: System.get_env("DATABASE_URL")
+  url: System.get_env("DATABASE_URL"),
   pool_size: System.get_env("POOL_SIZE")
 
 # TODO:
