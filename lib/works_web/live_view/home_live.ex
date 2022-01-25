@@ -26,7 +26,7 @@ defmodule WorksWeb.LiveView.HomeLive do
       </h3>
       <br/>
       <button phx-click="oss" style="display: block; margin: 10px auto; width: 200px; color: #073642; font-size: 25px" class="bg-green-500 hover:bg-green-400 font-bold border-b-4 border-green-700 hover:border-green-500 rounded">OSS</button>
-      <button phx-click="post" style="display: block; margin: 10px auto; width: 200px; color: #073642; font-size: 25px" class="bg-green-500 hover:bg-green-400 font-bold border-b-4 border-green-700 hover:border-green-500 rounded">Post</button>
+      <button phx-click="article" style="display: block; margin: 10px auto; width: 200px; color: #073642; font-size: 25px" class="bg-green-500 hover:bg-green-400 font-bold border-b-4 border-green-700 hover:border-green-500 rounded">Article</button>
       <button phx-click="music" style="display: block; margin: 10px auto; width: 200px; color: #073642; font-size: 25px" class="bg-green-500 hover:bg-green-400 font-bold border-b-4 border-green-700 hover:border-green-500 rounded">Music</button>
       <ul style="font-size: 15px; margin-top: 30px" class="font-bold">
         <li style="display: block; margin: 10px auto; width: fit-content; display: flex;">
@@ -56,7 +56,7 @@ defmodule WorksWeb.LiveView.HomeLive do
 
   def mount(_session, _params, socket) do
     {:ok, assign(socket, :open_source_softweres, [])}
-    {:ok, assign(socket, :posts, [])}
+    {:ok, assign(socket, :articles, [])}
     {:ok, assign(socket, :musics, [])}
   end
 
@@ -64,8 +64,8 @@ defmodule WorksWeb.LiveView.HomeLive do
     {:noreply, update(socket, :open_source_softweres, &(&1 ++ [%{}]))}
   end
 
-  def handle_event("post", _, socket) do
-    {:noreply, update(socket, :posts, &(&1 ++ [%{}]))}
+  def handle_event("article", _, socket) do
+    {:noreply, update(socket, :articles, &(&1 ++ [%{}]))}
   end
 
   def handle_event("music", _, socket) do

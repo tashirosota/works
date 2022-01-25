@@ -24,7 +24,7 @@ defmodule Works.DynamoDb.Repo do
     Dynamo.scan(table_name)
     |> ExAws.request!()
     |> Dynamo.decode_item(as: mod)
-    |> REnum.sort_by(& &1.id)
+    |> REnum.sort_by(& &1.order)
   end
 
   def find(table_name, mod, key_map) do

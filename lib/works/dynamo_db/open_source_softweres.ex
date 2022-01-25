@@ -1,7 +1,7 @@
 defmodule Works.DynamoDb.OpenSourceSoftweres do
   alias Works.DynamoDb.Repo
   use MakeEnumerable
-  defstruct [:id, :created_at, :description, :url]
+  defstruct [:id, :created_at, :description, :url, :title, :order]
 
   @schema %Works.DynamoDb.Schema{
     table_name: "OpenSourceSoftwares",
