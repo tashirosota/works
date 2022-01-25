@@ -52,7 +52,10 @@ defmodule Works.MixProject do
       {:ex_aws_dynamo, ">= 4.0.0"},
       {:dotenv, ">= 2.1.0"},
       {:r_enum, "~> 0.1"},
-      {:hackney, "~>  1.16"}
+      {:hackney, "~>  1.16"},
+      {:make_enumerable, "~> 0.0.1"},
+      {:timex, "~> 3.0"},
+      {:tailwind, "~> 0.1"}
     ]
   end
 
@@ -64,11 +67,15 @@ defmodule Works.MixProject do
   # See the documentation for `Mix` for more info on aliases.
   defp aliases do
     [
-      setup: ["deps.get", "ecto.setup"],
+      setup: ["deps.get", "ecto.setup", "cmd --cd assets npm install"],
       "ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
       "ecto.reset": ["ecto.drop", "ecto.setup"],
       test: ["ecto.create --quiet", "ecto.migrate --quiet", "test"],
-      "assets.deploy": ["esbuild default --minify", "phx.digest"]
+      "assets.deploy": [
+        "tailwind default --minify",
+        "esbuild default --minify",
+        "phx.digest"
+      ]
     ]
   end
 end

@@ -20,7 +20,7 @@ defmodule WorksWeb.Router do
   scope "/", WorksWeb do
     pipe_through :browser
 
-    get "/", PageController, :index
+    live("/", LiveView.HomeLive)
   end
 
   # Other scopes may use custom stacks.
@@ -67,5 +67,10 @@ defmodule WorksWeb.Router do
     pipe_through [:browser]
 
     delete "/users/log_out", UserSessionController, :delete
+  end
+
+  scope "/admin", WorksWeb do
+    pipe_through [:browser, :require_authenticated_user]
+    resources "/open_source_softwares", Admin.OpenSourceSoftweresController
   end
 end
