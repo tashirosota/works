@@ -1,30 +1,36 @@
-<h2>OSS List</h2>
-<table>
-  <thead> 
-    <th>作成日時</th>
-    <th>概要</th>
-    <th>ID</th>
-    <th>URL</th>
-  </thead>
-  <tbody> 
-    <%= @open_source_softweres |> REnum.map(fn el ->%>
+<div style="margin-top: 50px;">
+  <h2 class="font-bold text-xl" style="width: fit-content;">OSS List</h2>
+  <table class="border-separate border border-slate-500 table-auto">
+    <thead> 
       <tr>
-        <%= el |> REnum.map(fn {_, value} ->%>
-          <td> <%= value %></td>
-        <% end) %>
+        <th class="border border-slate-600" style="padding: 5px;">作成日時</th>
+        <th class="border border-slate-600" style="padding: 5px;">概要</th>
+        <th class="border border-slate-600" style="padding: 5px;">ID</th>
+        <th class="border border-slate-600" style="padding: 5px;">並び順</th>
+        <th class="border border-slate-600" style="padding: 5px;">タイトル</th>
+        <th class="border border-slate-600" style="padding: 5px;">URL</th>
       </tr>
-    <% end) %>
-  </tbody>
-</table>
-<h2>新規作成</h2>
-<.form let={form} for={@conn} action={Routes.open_source_softweres_path(@conn, :create)} as={:open_source_softwere}>
-  <%= label form, :概要 %>
-  <%= text_input form, :description, required: true %>
-  <%= label form, :URL %>
-  <%= text_input form, :url, required: true %>
-  <%= label form, :タイトル %>
-  <%= text_input form, :title, required: true %>
-  <%= label form, :並び順 %>
-  <%= text_input form, :order, required: true %>
-  <%= submit "Create" %>
-</.form>
+    </thead>
+    <tbody> 
+      <%= @open_source_softweres |> REnum.map(fn el ->%>
+        <tr>
+          <%= el |> REnum.map(fn {_, value} ->%>
+            <td class="border border-slate-600" style="padding: 5px;"><%= value %></td>
+          <% end) %>
+        </tr>
+      <% end) %>
+    </tbody>
+  </table>
+  <h2>新規作成</h2>
+  <.form let={form} for={@conn} action={Routes.open_source_softweres_path(@conn, :create)} as={:open_source_softwere} style="width: fit-content;">
+    <%= label form, :概要, style: "display: block;" %>
+    <%= text_input form, :description, required: true, style: "display: block; color: #073642; background: #93a1a1; width: 600px;" %>
+    <%= label form, :URL, style: "display: block;" %>
+    <%= text_input form, :url, required: true, style: "display: block; color: #073642; background: #93a1a1; width: 600px;" %>
+    <%= label form, :タイトル, style: "display: block;" %>
+    <%= text_input form, :title, required: true, style: "display: block; color: #073642; background: #93a1a1; width: 600px;" %>
+    <%= label form, :並び順, style: "display: block;" %>
+    <%= number_input form, :order, required: true, style: "display: block; color: #073642; background: #93a1a1; width: 600px;" %>
+    <%= submit "Create", style: "display: block; margin: 10px auto; width: 200px; color: #073642; font-size: 25px", class: "bg-green-500 hover:bg-green-400 font-bold border-b-4 border-green-700 hover:border-green-500 rounded" %>
+  </.form>
+</div>

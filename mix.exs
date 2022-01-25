@@ -55,7 +55,7 @@ defmodule Works.MixProject do
       {:hackney, "~>  1.16"},
       {:make_enumerable, "~> 0.0.1"},
       {:timex, "~> 3.0"},
-      {:phx_gen_tailwind, "~> 0.1.3"}
+      {:tailwind, "~> 0.1"}
     ]
   end
 
@@ -72,7 +72,7 @@ defmodule Works.MixProject do
       "ecto.reset": ["ecto.drop", "ecto.setup"],
       test: ["ecto.create --quiet", "ecto.migrate --quiet", "test"],
       "assets.deploy": [
-        "cmd --cd assets npm run deploy",
+        "tailwind default --minify",
         "esbuild default --minify",
         "phx.digest"
       ]
