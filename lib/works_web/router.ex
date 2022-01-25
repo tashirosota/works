@@ -72,5 +72,7 @@ defmodule WorksWeb.Router do
   scope "/admin", WorksWeb do
     pipe_through [:browser, :require_authenticated_user]
     resources "/open_source_softwares", Admin.OpenSourceSoftweresController
+    resources "/musics", Admin.MusicsController
+    resources "/articles", Admin.ArticlesController
   end
 end

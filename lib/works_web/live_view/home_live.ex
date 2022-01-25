@@ -1,6 +1,6 @@
 defmodule WorksWeb.LiveView.HomeLive do
   use WorksWeb, :live_view
-  alias Works.DynamoDb.OpenSourceSoftweres
+  alias Works.DynamoDb.{OpenSourceSoftweres, Articles, Musics}
 
   def render(assigns) do
     ~L"""
@@ -9,8 +9,8 @@ defmodule WorksWeb.LiveView.HomeLive do
       <h1 style="display: block; width: fit-content; margin: auto; font-size: 30px;">Sota Tashiro</h1>
       <h2 style="display: block; width: fit-content; margin: auto; font-size: 20px; color: #859900;">Welcome to my portfolio.</h2>
       <h3 style="display: block; width: fit-content; margin: auto; font-size: 15px; text-align: center;">
-        <p>♥I love Elixir, Ruby, SQL, Music and Beer🍻</p>
         <p>Software engineer and drummer.</p>
+        <p>♥I love Elixir, Ruby, SQL, Music and Beer🍻</p>
         <p>I'm interested mainly in functional programming, distributed systems and process.</p>
         <p style="color: #859900; margin-top: 5px;">Works.</p>
         <ul>
@@ -109,10 +109,26 @@ defmodule WorksWeb.LiveView.HomeLive do
   end
 
   def handle_event("article", _, socket) do
-    {:noreply, update(socket, :articles, &(&1 ++ [%{}]))}
+    func = fn before ->
+      if(before |> RUtils.present?()) do
+        []
+      else
+        Articles.all()
+      end
+    end
+
+    {:noreply, update(socket, :articles, func)}
   end
 
   def handle_event("music", _, socket) do
-    {:noreply, update(socket, :musics, &(&1 ++ [%{}]))}
+    func = fn before ->
+      if(before |> RUtils.present?()) do
+        []
+      else
+        Musics.all()
+      end
+    end
+
+    {:noreply, update(socket, :musics, func)}
   end
 end

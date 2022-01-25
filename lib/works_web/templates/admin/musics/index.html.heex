@@ -1,5 +1,5 @@
 <div style="margin-top: 50px;">
-  <h2 class="font-bold text-xl" style="width: fit-content;">OSS List</h2>
+  <h2 class="font-bold text-xl" style="width: fit-content;">Music List</h2>
   <table class="border-separate border border-slate-500 table-auto">
     <thead> 
       <tr>
@@ -12,7 +12,7 @@
       </tr>
     </thead>
     <tbody> 
-      <%= @open_source_softweres |> REnum.map(fn el ->%>
+      <%= @musics |> REnum.map(fn el ->%>
         <tr>
           <%= el |> REnum.map(fn {_, value} ->%>
             <td class="border border-slate-600" style="padding: 5px;"><%= value %></td>
@@ -22,9 +22,9 @@
     </tbody>
   </table>
   <h2>新規作成</h2>
-  <.form let={form} for={@conn} action={Routes.open_source_softweres_path(@conn, :create)} as={:open_source_softwere} style="width: fit-content;">
+  <.form let={form} for={@conn} action={Routes.musics_path(@conn, :create)} as={:music} style="width: fit-content;">
     <%= label form, :タイトル, style: "display: block;" %>
-    <%= text_input form, :title, required: true, style: "display: block; color: #073642; background: #93a1a1; width: 600px;" %>
+    <%= text_input form, :title, required: true, style: "display: block; color: #073642; background: #93a1a1; width: 600px;" %>  
     <%= label form, :概要, style: "display: block;" %>
     <%= text_input form, :description, required: true, style: "display: block; color: #073642; background: #93a1a1; width: 600px;" %>
     <%= label form, :URL, style: "display: block;" %>
