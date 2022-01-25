@@ -51,15 +51,3 @@ config :logger, level: :info
 config :works, Works.Repo,
   url: System.get_env("DATABASE_URL"),
   pool_size: System.get_env("POOL_SIZE")
-
-# TODO:
-config :ex_aws,
-access_key_id: System.get_env("AWS_ACCESS_KEY"),
-secret_access_key: System.get_env("AWS_SECRET_KEY"),
-region: "us-east-1"
-
-config :ex_aws, :dynamodb,
-scheme: "http://",
-host: System.get_env("DYNAMO_HOST"),
-port: "8000",
-region: "us-east-1"

@@ -12,7 +12,7 @@ config :works,
 
 # Configures the endpoint
 config :works, WorksWeb.Endpoint,
-  url: [host: "localhost"],
+  url: [host: "sotashiro.gigalixirapp.com"],
   render_errors: [view: WorksWeb.ErrorView, accepts: ~w(html json), layout: false],
   pubsub_server: Works.PubSub,
   live_view: [signing_salt: "VKu0FTTw"]
