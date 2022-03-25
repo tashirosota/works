@@ -9,6 +9,8 @@ config :works, Works.Repo,
   show_sensitive_data_on_connection_error: true,
   pool_size: 10
 
+config :ecto_cellar, repo: Works.Repo
+
 # use DynamoDB
 config :ex_aws,
   access_key_id: "dummy_access_key",

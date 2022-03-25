@@ -55,7 +55,8 @@ defmodule Works.MixProject do
       {:hackney, "~>  1.16"},
       {:make_enumerable, "~> 0.0.1"},
       {:timex, "~> 3.0"},
-      {:tailwind, "~> 0.1"}
+      {:tailwind, "~> 0.1"},
+      {:ecto_cellar, "~> 0.1"}
     ]
   end
 
